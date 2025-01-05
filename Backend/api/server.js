@@ -4,9 +4,18 @@ const cors = require('cors');
 
 const app = express();
 const PORT = 3000; 
-
+const allowedOrigins = ['https://yeti-project.vercel.app'];
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:5173' })); 
+app.use(cors({
+    origin: function(origin, callback) {
+        if (allowedOrigins.includes(origin) || !origin) {
+          callback(null, true);  
+        } else {
+          callback(new Error('Not allowed by CORS')); 
+        }
+      },
+      credentials: true,
+})); 
 
 app.post('/askbot', async (req, res) => {
   try {
