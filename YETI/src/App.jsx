@@ -53,10 +53,8 @@ const App = () => {
         else if(output.status === 500){
           text = "There has been an error in server.!";
         }
-        console.log(output)
       }
       catch (error) {
-        console.log(error);
         text = "Sorry, I am unable to process your request at the moment. Please try again later.";
       }
       setMessages((prevMessages) => [
